@@ -23,6 +23,8 @@
 		ABF763CE1761348D00C51FF2 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = ABF763A91761348C00C51FF2 /* Foundation.framework */; };
 		ABF763D61761348D00C51FF2 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = ABF763D41761348D00C51FF2 /* InfoPlist.strings */; };
 		ABF763D91761348D00C51FF2 /* MapperTests.m in Sources */ = {isa = PBXBuildFile; fileRef = ABF763D81761348D00C51FF2 /* MapperTests.m */; };
+		ABF763E3176135A000C51FF2 /* MapKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = ABF763E2176135A000C51FF2 /* MapKit.framework */; };
+		ABF763E61762338F00C51FF2 /* KMLParser.m in Sources */ = {isa = PBXBuildFile; fileRef = ABF763E51762338F00C51FF2 /* KMLParser.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -58,6 +60,9 @@
 		ABF763D51761348D00C51FF2 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		ABF763D71761348D00C51FF2 /* MapperTests.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MapperTests.h; sourceTree = "<group>"; };
 		ABF763D81761348D00C51FF2 /* MapperTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MapperTests.m; sourceTree = "<group>"; };
+		ABF763E2176135A000C51FF2 /* MapKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MapKit.framework; path = System/Library/Frameworks/MapKit.framework; sourceTree = SDKROOT; };
+		ABF763E41762338F00C51FF2 /* KMLParser.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = KMLParser.h; sourceTree = "<group>"; };
+		ABF763E51762338F00C51FF2 /* KMLParser.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = KMLParser.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -65,6 +70,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				ABF763E3176135A000C51FF2 /* MapKit.framework in Frameworks */,
 				ABF763A81761348C00C51FF2 /* UIKit.framework in Frameworks */,
 				ABF763AA1761348C00C51FF2 /* Foundation.framework in Frameworks */,
 				ABF763AC1761348C00C51FF2 /* CoreGraphics.framework in Frameworks */,
@@ -87,6 +93,7 @@
 		ABF7639B1761348C00C51FF2 = {
 			isa = PBXGroup;
 			children = (
+				ABF763E2176135A000C51FF2 /* MapKit.framework */,
 				ABF763AD1761348C00C51FF2 /* Mapper */,
 				ABF763D11761348D00C51FF2 /* MapperTests */,
 				ABF763A61761348C00C51FF2 /* Frameworks */,
@@ -120,6 +127,8 @@
 				ABF763B61761348C00C51FF2 /* MapperAppDelegate.h */,
 				ABF763B71761348C00C51FF2 /* MapperAppDelegate.m */,
 				ABF763BF1761348D00C51FF2 /* MainStoryboard.storyboard */,
+				ABF763E41762338F00C51FF2 /* KMLParser.h */,
+				ABF763E51762338F00C51FF2 /* KMLParser.m */,
 				ABF763C21761348D00C51FF2 /* MapperViewController.h */,
 				ABF763C31761348D00C51FF2 /* MapperViewController.m */,
 				ABF763AE1761348C00C51FF2 /* Supporting Files */,
@@ -274,6 +283,7 @@
 				ABF763B41761348C00C51FF2 /* main.m in Sources */,
 				ABF763B81761348C00C51FF2 /* MapperAppDelegate.m in Sources */,
 				ABF763C41761348D00C51FF2 /* MapperViewController.m in Sources */,
+				ABF763E61762338F00C51FF2 /* KMLParser.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
