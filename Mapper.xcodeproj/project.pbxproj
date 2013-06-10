@@ -27,6 +27,7 @@
 		ABF763E61762338F00C51FF2 /* KMLParser.m in Sources */ = {isa = PBXBuildFile; fileRef = ABF763E51762338F00C51FF2 /* KMLParser.m */; };
 		ABF763E81762408B00C51FF2 /* CoreLocation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = ABF763E71762408B00C51FF2 /* CoreLocation.framework */; };
 		ABF763EA1762422100C51FF2 /* KML_Sample.kml in Resources */ = {isa = PBXBuildFile; fileRef = ABF763E91762422100C51FF2 /* KML_Sample.kml */; };
+		ABF763EC17661B3700C51FF2 /* madison_gps.kml in Resources */ = {isa = PBXBuildFile; fileRef = ABF763EB17661B3700C51FF2 /* madison_gps.kml */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -67,6 +68,7 @@
 		ABF763E51762338F00C51FF2 /* KMLParser.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = KMLParser.m; sourceTree = "<group>"; };
 		ABF763E71762408B00C51FF2 /* CoreLocation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreLocation.framework; path = System/Library/Frameworks/CoreLocation.framework; sourceTree = SDKROOT; };
 		ABF763E91762422100C51FF2 /* KML_Sample.kml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; name = KML_Sample.kml; path = ../KML_Sample.kml; sourceTree = "<group>"; };
+		ABF763EB17661B3700C51FF2 /* madison_gps.kml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = madison_gps.kml; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -149,6 +151,7 @@
 				ABF763B01761348C00C51FF2 /* InfoPlist.strings */,
 				ABF763B31761348C00C51FF2 /* main.m */,
 				ABF763E91762422100C51FF2 /* KML_Sample.kml */,
+				ABF763EB17661B3700C51FF2 /* madison_gps.kml */,
 				ABF763B51761348C00C51FF2 /* Mapper-Prefix.pch */,
 				ABF763B91761348C00C51FF2 /* Default.png */,
 				ABF763BB1761348D00C51FF2 /* Default@2x.png */,
@@ -254,6 +257,7 @@
 				ABF763BE1761348D00C51FF2 /* Default-568h@2x.png in Resources */,
 				ABF763C11761348D00C51FF2 /* MainStoryboard.storyboard in Resources */,
 				ABF763EA1762422100C51FF2 /* KML_Sample.kml in Resources */,
+				ABF763EC17661B3700C51FF2 /* madison_gps.kml in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
