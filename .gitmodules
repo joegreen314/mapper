@@ -1,3 +1,6 @@
 [submodule "master"]
 	path = master
 	url = git://github.com/FLCLjp/iOS-KML-Framework.git
+[submodule "kml"]
+	path = kml
+	url = git://github.com/FLCLjp/iOS-KML-Framework.git
