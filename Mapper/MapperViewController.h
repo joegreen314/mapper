@@ -10,7 +10,7 @@
 #import <MapKit/MapKit.h>
 #import "KMLParser.h"
 
-@interface MapperViewController : UIViewController{
+@interface MapperViewController : UIViewController <MKMapViewDelegate>{
     KMLParser *kmlParser;
     IBOutlet MKMapView *map;
 }

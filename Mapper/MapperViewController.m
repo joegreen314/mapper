@@ -17,9 +17,11 @@
 {
     [super viewDidLoad];
     
+    map.delegate=self;
+    
     // Locate the path to the route.kml file in the application's bundle
     // and parse it with the KMLParser.
-    NSString *path = [[NSBundle mainBundle] pathForResource:@"KML_Sample" ofType:@"kml"];
+    NSString *path = [[NSBundle mainBundle] pathForResource:@"madison_gps" ofType:@"kml"];
     NSURL *url = [NSURL fileURLWithPath:path];
     kmlParser = [[KMLParser alloc] initWithURL:url];
     [kmlParser parseKML];
