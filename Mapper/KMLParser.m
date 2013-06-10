@@ -279,7 +279,6 @@ static void strToCoords(NSString *str, CLLocationCoordinate2D **coordsOut, NSUIn
             if (CLLocationCoordinate2DIsValid(c))
                 coords[read++] = c;
         }
-        [scanner release];
     }
     
     *coordsOut = coords;
@@ -325,15 +324,6 @@ static void strToCoords(NSString *str, CLLocationCoordinate2D **coordsOut, NSUIn
     return self;
 }
 
-- (void)dealloc
-{
-    [_styles release];
-    [_placemarks release];
-    [_xmlParser release];
-    
-    [super dealloc];
-}
-
 - (void)parseKML
 {
     [_xmlParser parse];
@@ -350,7 +340,7 @@ static void strToCoords(NSString *str, CLLocationCoordinate2D **coordsOut, NSUIn
         if (overlay)
             [overlays addObject:overlay];
     }
-    return [overlays autorelease];
+    return overlays;
 }
 
 // Return the list of KMLPlacemarks from the object graph that are simply
@@ -363,7 +353,7 @@ static void strToCoords(NSString *str, CLLocationCoordinate2D **coordsOut, NSUIn
         if (point)
             [points addObject:point];
     }
-    return [points autorelease];
+    return points;
 }
 
 - (MKAnnotationView *)viewForAnnotation:(id <MKAnnotation>)point
@@ -459,7 +449,6 @@ static void strToCoords(NSString *str, CLLocationCoordinate2D **coordsOut, NSUIn
             [_placemark endStyle];
         } else if (_style) {
             [_styles setObject:_style forKey:_style.identifier];
-            [_style release];
             _style = nil;
         }
     } else if (ELTYPE(PolyStyle)) {
@@ -479,7 +468,6 @@ static void strToCoords(NSString *str, CLLocationCoordinate2D **coordsOut, NSUIn
     else if (ELTYPE(Placemark)) {
         if (_placemark) {
             [_placemarks addObject:_placemark];
-            [_placemark release];
             _placemark = nil;
         }
     } else if (ELTYPE(Name)) {
@@ -526,16 +514,9 @@ static void strToCoords(NSString *str, CLLocationCoordinate2D **coordsOut, NSUIn
 - (id)initWithIdentifier:(NSString *)ident
 {
     if (self = [super init]) {
-        identifier = [ident retain];
+        identifier = ident;
     }
     return self;
-}
-
-- (void)dealloc
-{
-    [identifier release];
-    [accum release];
-    [super dealloc];
 }
 
 - (BOOL)canAddString
@@ -554,7 +535,6 @@ static void strToCoords(NSString *str, CLLocationCoordinate2D **coordsOut, NSUIn
 
 - (void)clearString
 {
-    [accum release];
     accum = nil;
 }
 
@@ -594,11 +574,9 @@ static void strToCoords(NSString *str, CLLocationCoordinate2D **coordsOut, NSUIn
     flags.inColor = NO;
     
     if (flags.inLineStyle) {
-        [strokeColor release];
-        strokeColor = [[UIColor colorWithKMLString:accum] retain];
+        strokeColor = [UIColor colorWithKMLString:accum];
     } else if (flags.inPolyStyle) {
-        [fillColor release];
-        fillColor = [[UIColor colorWithKMLString:accum] retain];
+        fillColor = [UIColor colorWithKMLString:accum];
     }
     
     [self clearString];
@@ -699,7 +677,7 @@ static void strToCoords(NSString *str, CLLocationCoordinate2D **coordsOut, NSUIn
     // KMLPoint corresponds to MKPointAnnotation
     MKPointAnnotation *annotation = [[MKPointAnnotation alloc] init];
     annotation.coordinate = point;
-    return [annotation autorelease];
+    return annotation;
 }
 
 // KMLPoint does not override createOverlayView: because there is no such
@@ -710,12 +688,6 @@ static void strToCoords(NSString *str, CLLocationCoordinate2D **coordsOut, NSUIn
 
 @implementation KMLPolygon
 
-- (void)dealloc
-{
-    [outerRing release];
-    [innerRings release];
-    [super dealloc];
-}
 
 - (BOOL)canAddString
 {
@@ -745,7 +717,6 @@ static void strToCoords(NSString *str, CLLocationCoordinate2D **coordsOut, NSUIn
         innerRings = [[NSMutableArray alloc] init];
     }
     [innerRings addObject:ring];
-    [ring release];
     [self clearString];
 }
 
@@ -787,7 +758,6 @@ static void strToCoords(NSString *str, CLLocationCoordinate2D **coordsOut, NSUIn
     // of interior polygons parsed.
     MKPolygon *poly = [MKPolygon polygonWithCoordinates:coords count:coordsLen interiorPolygons:innerPolys];
     free(coords);
-    [innerPolys release];
     return poly;
 }
 
@@ -796,7 +766,7 @@ static void strToCoords(NSString *str, CLLocationCoordinate2D **coordsOut, NSUIn
     // KMLPolygon corresponds to MKPolygonView
     
     MKPolygonView *polyView = [[MKPolygonView alloc] initWithPolygon:(MKPolygon *)shape];
-    return [polyView autorelease];
+    return polyView;
 }
 
 @end
@@ -804,13 +774,6 @@ static void strToCoords(NSString *str, CLLocationCoordinate2D **coordsOut, NSUIn
 @implementation KMLLineString
 
 @synthesize points, length;
-
-- (void)dealloc
-{
-    if (points)
-        free(points);
-    [super dealloc];
-}
 
 - (void)endCoordinates
 {
@@ -834,7 +797,7 @@ static void strToCoords(NSString *str, CLLocationCoordinate2D **coordsOut, NSUIn
 {
     // KMLLineString corresponds to MKPolylineView
     MKPolylineView *lineView = [[MKPolylineView alloc] initWithPolyline:(MKPolyline *)shape];
-    return [lineView autorelease];
+    return lineView;
 }
 
 @end
@@ -843,18 +806,6 @@ static void strToCoords(NSString *str, CLLocationCoordinate2D **coordsOut, NSUIn
 
 @synthesize style, styleUrl, geometry, name, placemarkDescription;
 
-- (void)dealloc
-{
-    [style release];
-    [geometry release];
-    [name release];
-    [placemarkDescription release];
-    [styleUrl release];
-    [mkShape release];
-    [overlayView release];
-    [annotationView release];
-    [super dealloc];
-}
 
 - (BOOL)canAddString
 {
@@ -878,7 +829,6 @@ static void strToCoords(NSString *str, CLLocationCoordinate2D **coordsOut, NSUIn
 - (void)endName
 {
     flags.inName = NO;
-    [name release];
     name = [accum copy];
     [self clearString];
 }
@@ -890,7 +840,6 @@ static void strToCoords(NSString *str, CLLocationCoordinate2D **coordsOut, NSUIn
 - (void)endDescription
 {
     flags.inDescription = NO;
-    [placemarkDescription release];
     placemarkDescription = [accum copy];
     [self clearString];
 }
@@ -902,7 +851,6 @@ static void strToCoords(NSString *str, CLLocationCoordinate2D **coordsOut, NSUIn
 - (void)endStyleUrl
 {
     flags.inStyleUrl = NO;
-    [styleUrl release];
     styleUrl = [accum copy];
     [self clearString];
 }
@@ -910,7 +858,6 @@ static void strToCoords(NSString *str, CLLocationCoordinate2D **coordsOut, NSUIn
 - (void)beginStyleWithIdentifier:(NSString *)ident
 {
     flags.inStyle = YES;
-    [style release];
     style = [[KMLStyle alloc] initWithIdentifier:ident];
 }
 - (void)endStyle
@@ -946,7 +893,7 @@ static void strToCoords(NSString *str, CLLocationCoordinate2D **coordsOut, NSUIn
 - (void)_createShape
 {
     if (!mkShape) {
-        mkShape = [[geometry mapkitShape] retain];
+        mkShape = [geometry mapkitShape];
         mkShape.title = name;
         // Skip setting the subtitle for now because they're frequently
         // too verbose for viewing on in a callout in most kml files.
@@ -982,7 +929,7 @@ static void strToCoords(NSString *str, CLLocationCoordinate2D **coordsOut, NSUIn
     if (!overlayView) {
         id <MKOverlay> overlay = [self overlay];
         if (overlay) {
-            overlayView = [[geometry createOverlayView:overlay] retain];
+            overlayView = [geometry createOverlayView:overlay];
             [style applyToOverlayPathView:overlayView];
         }
     }
@@ -1025,7 +972,6 @@ static void strToCoords(NSString *str, CLLocationCoordinate2D **coordsOut, NSUIn
     CGFloat bf = (CGFloat)b / 255.f;
     CGFloat af = (CGFloat)a / 255.f;
     
-    [scanner release];
     
     return [UIColor colorWithRed:rf green:gf blue:bf alpha:af];
 }

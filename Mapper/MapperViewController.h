@@ -8,8 +8,11 @@
 
 #import <UIKit/UIKit.h>
 #import <MapKit/MapKit.h>
+#import "KMLParser.h"
 
-@interface MapperViewController : UIViewController
-@property (weak, nonatomic) IBOutlet MKMapView *mapView;
+@interface MapperViewController : UIViewController{
+    KMLParser *kmlParser;
+    IBOutlet MKMapView *map;
+}
 
 @end
